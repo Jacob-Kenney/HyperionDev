@@ -258,7 +258,7 @@ class Task_manager:
 
         # Write a new task to the tasks file
         with open('tasks.txt', 'a') as tasks_file:
-            new_task = f'\n{username};{title};{description};{due_date};{curr_date};No'
+            new_task = f'{username};{title};{description};{due_date};{curr_date};No\n'
             tasks_file.write(new_task)
         print('\n|---------------------------------|')
         print('|  Successfully created new task  |')
@@ -335,7 +335,7 @@ class Task_manager:
         else:
             valid_task = False
             while valid_task == False:
-                task_selected = input('To select a task enter a task ID, or enter -1 to return to the menu')
+                task_selected = input('To select a task enter a task ID, or enter -1 to return to the menu:')
                 if task_selected == '-1':
                     print('Returning to menu...')
                     self.menu()
@@ -409,10 +409,11 @@ class Task_manager:
                     new_tasks.write(task)
                     task_id = task_id - 1
 
-        # Update the task property as tasks have been edited
-        self.tasks = self.update_tasks()
         os.remove('tasks.txt')
         os.rename('temporary_tasks.txt', 'tasks.txt')
+
+        # Update the task property as tasks have been edited
+        self.tasks = self.update_tasks()
         print('\n|-----------------|')
         print('|  Task complete  |')
         print('|-----------------|')
@@ -476,12 +477,12 @@ class Task_manager:
                     new_tasks.write(task)
                     task_id = task_id - 1
 
-        # Update the tasks property as tasks have changed
-        self.tasks = self.update_tasks()
-
         # Rename the temporary updated tasks file to tasks.txt
         os.remove('tasks.txt')
         os.rename('temporary_tasks.txt', 'tasks.txt')
+
+        # Update the tasks property as tasks have changed
+        self.tasks = self.update_tasks()
         print('\n|--------------------------------|')
         print('f|  Task {task_id} assigned to: {new_username}')
         print('|--------------------------------|')
@@ -513,12 +514,12 @@ class Task_manager:
                     new_tasks.write(task)
                     task_id = task_id - 1
 
-        # Update the task property as tasks have changed
-        self.tasks = self.update_tasks()
-
         # Rename the temporary updated tasks file to tasks.txt
         os.remove('tasks.txt')
         os.rename('temporary_tasks.txt', 'tasks.txt')
+
+        # Update the task property as tasks have changed
+        self.tasks = self.update_tasks()
         print('\n|--------------------------------|')
         print(f'| Task {task_id} due date set to: {new_date}')
         print('|--------------------------------|')
